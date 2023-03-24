@@ -71,6 +71,7 @@ class ApplicationBloc with ChangeNotifier {
     }
 
     if (placeType != null) {
+      print('https://www.google.com/maps/search/${value}/@${currentLocation!.latitude},${currentLocation!.longitude}, 12z');
       openUrl('https://www.google.com/maps/search/${value}/@${currentLocation!.latitude},${currentLocation!.longitude}, 12z');
     }
 

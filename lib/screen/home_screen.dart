@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   GoogleMapController? mapController;
   Set<Marker> markers = Set();
   BitmapDescriptor? markerbitmap;
+  BitmapDescriptor? markerbitmap2;
   int initialize = 0;
   AudioPlayer? player;
 
@@ -33,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void bitmap() async {
     markerbitmap = await BitmapDescriptor.fromAssetImage(const ImageConfiguration(), "assets/images/robo1.png");
+    markerbitmap2 = await BitmapDescriptor.fromAssetImage(const ImageConfiguration(), "assets/images/marker.png");
     player = AudioPlayer();
     await player!.setLoopMode(LoopMode.all);
     markers.add(Marker(
@@ -40,6 +42,42 @@ class _HomeScreenState extends State<HomeScreen> {
         position: const LatLng(37.42796133580664, -122.085749655962), //position of marker
         infoWindow: const InfoWindow(title: 'Starting Point ', snippet: 'Start Marker'),
         icon: markerbitmap! //Icon for Marker
+        ));
+    markers.add(Marker(
+        markerId: const MarkerId('121212'),
+        position: const LatLng(23.949060173720277, 90.3905911397721), //position of marker
+        infoWindow: const InfoWindow(title: 'Gacha Police Station', snippet: 'Start Marker'),
+        icon: markerbitmap2! //Icon for Marker
+        ));
+    markers.add(Marker(
+        markerId: const MarkerId('2dwewewew'),
+        position: const LatLng(23.980475357194262, 90.3802651387415), //position of marker
+        infoWindow: const InfoWindow(title: 'Vogra Police Camp', snippet: 'Start Marker'),
+        icon: markerbitmap2! //Icon for Marker
+        ));
+    markers.add(Marker(
+        markerId: const MarkerId('wwewewdcfee2323'),
+        position: const LatLng(23.975891124285642, 90.38775262997532), //position of marker
+        infoWindow: const InfoWindow(title: 'Industrial Police-2, Gazipur.', snippet: 'Start Marker'),
+        icon: markerbitmap2! //Icon for Marker
+        ));
+    markers.add(Marker(
+        markerId: const MarkerId('ewewew232323232'),
+        position: const LatLng(23.976518522091773, 90.39410410074655), //position of marker
+        infoWindow: const InfoWindow(title: 'Industrial Police Gazipur, 2', snippet: 'Start Marker'),
+        icon: markerbitmap2! //Icon for Marker
+        ));
+    markers.add(Marker(
+        markerId: const MarkerId('qweyyeee'),
+        position: const LatLng(23.994564854773795, 90.39486500457419), //position of marker
+        infoWindow: const InfoWindow(title: 'Gazipur Metropoliton Police Headquarters', snippet: 'Start Marker'),
+        icon: markerbitmap2! //Icon for Marker
+        ));
+    markers.add(Marker(
+        markerId: const MarkerId('333656877522335465'),
+        position: const LatLng(23.996267756880496, 90.40024987041753), //position of marker
+        infoWindow: const InfoWindow(title: 'গাজীপুর পুলিশ লাইন্স', snippet: 'Start Marker'),
+        icon: markerbitmap2! //Icon for Marker
         ));
   }
 
