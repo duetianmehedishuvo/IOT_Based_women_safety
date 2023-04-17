@@ -2,12 +2,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:women_safety/bloc/application_bloc.dart';
-import 'package:women_safety/screen/home_screen.dart';
-import 'package:women_safety/screen/places.dart';
+import 'package:women_safety/provider/auth_provider.dart';
+import 'package:women_safety/provider/location_provider.dart';
+import 'package:women_safety/screen/splash_screen.dart';
+import 'package:women_safety/util/helper.dart';
+
+import 'di_container.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await di.init();
   await Firebase.initializeApp(
     options: const FirebaseOptions(
       apiKey: "AIzaSyADd2JSSzNQvGCztaJ7-BAOl1bHiWtSKAY",
@@ -16,7 +20,13 @@ void main() async {
       projectId: "women-safety-93296",
     ),
   );
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => di.sl<AuthProvider>()),
+      ChangeNotifierProvider(create: (context) => di.sl<LocationProvider>()),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -28,10 +38,11 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
         create: (BuildContext context) => ApplicationBloc(),
         child: MaterialApp(
-          title: 'Flutter Demo',
+          title: 'Women Safety',
+          navigatorKey: Helper.navigatorKey,
           debugShowCheckedModeBanner: false,
           theme: ThemeData(primarySwatch: Colors.red),
-          home: const HomeScreen(),
+          home: const SplashScreen(),
         ));
   }
 }

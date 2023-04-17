@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class MenuDrawer extends StatelessWidget {
@@ -13,8 +12,6 @@ class MenuDrawer extends StatelessWidget {
     );
   }
 
-
-
   List<Widget> buildMenuItems(BuildContext context) {
     IconData icon = Icons.check;
     final List<String> menuTitles = [
@@ -27,13 +24,18 @@ class MenuDrawer extends StatelessWidget {
     ];
     List<Widget> menuItems = [];
     menuItems.add(DrawerHeader(
-      decoration: BoxDecoration(
-        color: Colors.purple
-      ),
+      decoration: const BoxDecoration(color: Colors.purple),
       child: Column(
         children: <Widget>[
-          Image.asset("assets/images/logos/white.png", width: 100, height: 100,),
-          Text('Safe Herven', style: TextStyle(color: Colors.white, fontSize: 25),)
+          Image.asset(
+            "assets/images/logos/white.png",
+            width: 100,
+            height: 100,
+          ),
+          const Text(
+            'Safe Herven',
+            style: TextStyle(color: Colors.white, fontSize: 25),
+          )
         ],
       ),
     ));
@@ -58,11 +60,15 @@ class MenuDrawer extends StatelessWidget {
           icon = Icons.health_and_safety;
           break;
       }
-      Widget screen = Container();
       menuItems.add(ListTile(
-        leading: Icon(icon, color: Colors.purple,),
-        title: Text(element,
-        style: const TextStyle(fontSize: 18),),
+        leading: Icon(
+          icon,
+          color: Colors.purple,
+        ),
+        title: Text(
+          element,
+          style: const TextStyle(fontSize: 18),
+        ),
         onTap: () {
           // switch (element) {
           //   case 'Home':
@@ -102,12 +108,13 @@ class MenuDrawer extends StatelessWidget {
         },
       ));
     }
-    menuItems.add(Divider(thickness: 2,));
-    menuItems.add(Padding(
+    menuItems.add(const Divider(
+      thickness: 2,
+    ));
+    menuItems.add(const Padding(
       padding: EdgeInsets.symmetric(horizontal: 30, vertical: 40),
       // child: const SignOutButton(),
     ));
     return menuItems;
   }
-
 }

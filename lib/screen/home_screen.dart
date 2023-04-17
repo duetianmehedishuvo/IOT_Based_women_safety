@@ -4,7 +4,6 @@ import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 import 'package:women_safety/bloc/application_bloc.dart';
 import 'package:women_safety/database/message_dao.dart';
-import 'package:women_safety/shared/appbar.dart';
 import 'package:women_safety/shared/bottom.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   CameraPosition initialCameraPosition =
       const CameraPosition(target: LatLng(37.42796133580664, -122.085749655962), zoom: 12, tilt: 80, bearing: 30);
   GoogleMapController? mapController;
-  Set<Marker> markers = Set();
+  Set<Marker> markers = {};
   BitmapDescriptor? markerbitmap;
   BitmapDescriptor? markerbitmap2;
   int initialize = 0;
