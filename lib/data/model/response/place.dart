@@ -1,5 +1,6 @@
 
-import 'package:women_safety/models/geometry.dart';
+
+import 'package:women_safety/data/model/response/geometry.dart';
 
 class Place {
   final Geometry geometry;

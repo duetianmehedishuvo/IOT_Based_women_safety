@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:women_safety/bloc/application_bloc.dart';
+import 'package:women_safety/helper/application_bloc.dart';
 import 'package:women_safety/provider/auth_provider.dart';
 import 'package:women_safety/provider/location_provider.dart';
 import 'package:women_safety/screen/splash_screen.dart';

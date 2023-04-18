@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
-import 'package:women_safety/bloc/application_bloc.dart';
-import 'package:women_safety/database/message_dao.dart';
+import 'package:women_safety/helper/application_bloc.dart';
+import 'package:women_safety/helper/message_dao.dart';
 import 'package:women_safety/shared/bottom.dart';
 
 class HomeScreen extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:women_safety/models/organization.dart';
+import 'package:women_safety/data/model/response/organization.dart';
 
 class OrgCard extends StatelessWidget {
   final Organization ngo;

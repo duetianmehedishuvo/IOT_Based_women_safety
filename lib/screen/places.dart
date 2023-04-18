@@ -2,15 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:provider/provider.dart';
-
 // import 'package:flutter_config/flutter_config.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:women_safety/bloc/application_bloc.dart';
+import 'package:provider/provider.dart';
+import 'package:women_safety/helper/application_bloc.dart';
+import 'package:women_safety/data/model/response/place.dart';
 import 'package:women_safety/shared/appbar.dart';
 import 'package:women_safety/shared/bottom.dart';
-
-import '../models/place.dart';
 
 class PlacesScreen extends StatefulWidget {
   const PlacesScreen({Key? key}) : super(key: key);

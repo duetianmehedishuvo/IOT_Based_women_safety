@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:women_safety/bloc/application_bloc.dart';
+import 'package:women_safety/helper/application_bloc.dart';
 import 'package:women_safety/screen/helpline_number_screen.dart';
 import 'package:women_safety/screen/home_screen.dart';
 import 'package:women_safety/screen/places.dart';

@@ -4,14 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:women_safety/models/geometry.dart';
-import 'package:women_safety/models/location.dart';
-import 'package:women_safety/models/place.dart';
+import 'package:women_safety/data/model/response/geometry.dart';
+import 'package:women_safety/data/model/response/location.dart';
+import 'package:women_safety/data/model/response/place.dart';
+import 'package:women_safety/data/model/response/place_search.dart';
 import 'package:women_safety/services/geolocator_service.dart';
 import 'package:women_safety/services/marker_service.dart';
 import 'package:women_safety/services/places_service.dart';
-
-import '../models/place_search.dart';
 
 class ApplicationBloc with ChangeNotifier {
   final geolocatorService = GeolocatorService();
@@ -43,14 +42,14 @@ class ApplicationBloc with ChangeNotifier {
   }
 
   searchPLaces(String searchTerm) async {
-    searchResults = await placesService.getAutoComplete(searchTerm) as List<PlaceSearch>;
+   // searchResults = await placesService.getAutoComplete(searchTerm) as List<PlaceSearch>;
     notifyListeners();
   }
 
   setSelectedLocation(String? placeId) async {
-    var sLocation = await placesService.getPlace(placeId);
-    selectedLocation.add(await placesService.getPlace(placeId));
-    selectedLocationStatic = sLocation;
+    // var sLocation = await placesService.getPlace(placeId);
+    // selectedLocation.add(await placesService.getPlace(placeId));
+    // selectedLocationStatic = sLocation;
     searchResults = null;
     notifyListeners();
   }

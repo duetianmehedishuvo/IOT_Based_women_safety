@@ -1,5 +1,6 @@
 
-import 'package:women_safety/models/location.dart';
+
+import 'package:women_safety/data/model/response/location.dart';
 
 class Geometry {
   final Location location;

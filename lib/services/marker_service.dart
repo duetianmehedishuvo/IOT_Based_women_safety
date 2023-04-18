@@ -1,6 +1,5 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-import '../models/place.dart';
+import 'package:women_safety/data/model/response/place.dart';
 
 class MarkerService {
 
