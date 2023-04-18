@@ -28,17 +28,17 @@ class SignupScreen extends StatelessWidget {
       body: Consumer<AuthProvider>(
         builder: (context, authProvider, child) => Stack(
           children: [
-            SizedBox(width: getAppSizeWidth(context), height: getAppSizeHeight(context)),
+            SizedBox(width: getAppSizeWidth(), height: getAppSizeHeight()),
             const HeaderWidget(title: 'Create Account', subTitle: 'Fill the below form to create a new account.', isShowBackButton: true),
             Container(
               margin: const EdgeInsets.only(top: 70),
-              height: getAppSizeHeight(context),
-              width: getAppSizeWidth(context),
+              height: getAppSizeHeight(),
+              width: getAppSizeWidth(),
               child: Consumer<AuthProvider>(
                 builder: (context, authProvider, child) => ListView(
                   physics: const BouncingScrollPhysics(),
                   children: [
-                    SizedBox(height: getAppSizeHeight(context) * 0.18),
+                    SizedBox(height: getAppSizeHeight() * 0.18),
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 15),
                       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),

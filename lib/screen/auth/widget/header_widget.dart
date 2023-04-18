@@ -16,8 +16,8 @@ class HeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: getAppSizeHeight(context) * 0.4,
-      width: getAppSizeWidth(context),
+      height: getAppSizeHeight() * 0.4,
+      width: getAppSizeWidth(),
       decoration: const BoxDecoration(
           color: colorPrimary, borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50), bottomRight: Radius.circular(50))),
       child: ListView(
@@ -26,7 +26,7 @@ class HeaderWidget extends StatelessWidget {
           SizedBox(height: isShowBackButton ? 40 : 50),
           isShowBackButton
               ? Container(
-                  width: getAppSizeWidth(context),
+                  width: getAppSizeWidth(),
                   padding: const EdgeInsets.only(left: 20),
                   child: InkWell(
                     onTap: () {
@@ -40,7 +40,7 @@ class HeaderWidget extends StatelessWidget {
               : const SizedBox.shrink(),
           SizedBox(height: isShowBackButton ? 10 : 0),
           Container(
-              width: getAppSizeWidth(context) * 0.6,
+              width: getAppSizeWidth() * 0.6,
               margin: const EdgeInsets.symmetric(horizontal: 40),
               height: 84,
               alignment: Alignment.center,

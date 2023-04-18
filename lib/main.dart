@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:women_safety/helper/application_bloc.dart';
 import 'package:women_safety/provider/auth_provider.dart';
 import 'package:women_safety/provider/location_provider.dart';
+import 'package:women_safety/provider/weather_provider.dart';
 import 'package:women_safety/screen/splash_screen.dart';
 import 'package:women_safety/util/helper.dart';
 
@@ -24,6 +25,7 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (context) => di.sl<AuthProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<LocationProvider>()),
+      ChangeNotifierProvider(create: (context) => di.sl<WeatherProvider>()),
     ],
     child: const MyApp(),
   ));

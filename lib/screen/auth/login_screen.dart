@@ -26,14 +26,14 @@ class LoginScreen extends StatelessWidget {
       body: Consumer<AuthProvider>(
         builder: (context, authProvider, child) => Stack(
           children: [
-            SizedBox(width: getAppSizeWidth(context), height: getAppSizeHeight(context)),
+            SizedBox(width: getAppSizeWidth(), height: getAppSizeHeight()),
             const HeaderWidget(),
             SizedBox(
-              height: getAppSizeHeight(context),
-              width: getAppSizeWidth(context),
+              height: getAppSizeHeight(),
+              width: getAppSizeWidth(),
               child: ListView(
                 children: [
-                  SizedBox(height: getAppSizeHeight(context) * 0.25),
+                  SizedBox(height: getAppSizeHeight() * 0.25),
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 15),
                     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),

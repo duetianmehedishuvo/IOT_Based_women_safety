@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:women_safety/util/helper.dart';
 
-double getAppSizeHeight(BuildContext context) {
-  return MediaQuery.of(context).size.height;
+double getAppSizeHeight() {
+  return MediaQuery.of(Helper.navigatorKey.currentState!.context).size.height;
 }
 
-double getAppSizeWidth(BuildContext context) {
-  return MediaQuery.of(context).size.width;
+double getAppSizeWidth() {
+  return MediaQuery.of(Helper.navigatorKey.currentState!.context).size.width;
 }
 
 class ThemeUtility {

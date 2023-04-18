@@ -4,8 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:women_safety/data/datasource/remote/dio/dio_client.dart';
 import 'package:women_safety/data/datasource/remote/dio/logging_interceptor.dart';
 import 'package:women_safety/data/repository/splash_repo.dart';
+import 'package:women_safety/data/repository/weather_repo.dart';
 import 'package:women_safety/provider/auth_provider.dart';
 import 'package:women_safety/provider/location_provider.dart';
+import 'package:women_safety/provider/weather_provider.dart';
 import 'package:women_safety/util/app_constant.dart';
 
 final sl = GetIt.instance;
@@ -15,10 +17,12 @@ Future<void> init() async {
   sl.registerLazySingleton(() => DioClient(AppConstant.baseUrl, sl(), sharedPreferences: sl(), loggingInterceptor: sl()));
   // Repository
   sl.registerLazySingleton(() => SplashRepo(dioClient: sl()));
+  sl.registerLazySingleton(() => WeatherRepo(dioClient: sl()));
 
   // Provider
   sl.registerFactory(() => AuthProvider());
   sl.registerFactory(() => LocationProvider());
+  sl.registerFactory(() => WeatherProvider(weatherRepo: sl()));
 
   // External
   final sharedPreferences = await SharedPreferences.getInstance();
