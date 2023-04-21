@@ -1,8 +1,6 @@
 
-import 'package:dio/dio.dart';
 import 'package:women_safety/data/datasource/remote/dio/dio_client.dart';
 
-import '../datasource/remote/exception/api_error_handler.dart';
 
 class SplashRepo{
   final DioClient dioClient;

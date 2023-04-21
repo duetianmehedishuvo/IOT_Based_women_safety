@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:women_safety/helper/application_bloc.dart';
 import 'package:women_safety/data/model/response/place.dart';
 import 'package:women_safety/shared/appbar.dart';
-import 'package:women_safety/shared/bottom.dart';
 
 class PlacesScreen extends StatefulWidget {
   const PlacesScreen({Key? key}) : super(key: key);

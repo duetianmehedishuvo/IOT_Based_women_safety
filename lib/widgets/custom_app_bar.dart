@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:women_safety/util/theme/app_colors.dart';
 
-import '../util/image.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
@@ -50,7 +49,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             isBackButtonExist!
                 ? IconButton(
-                    icon: Icon(Icons.arrow_back,color: Colors.white),
+                    icon: const Icon(Icons.arrow_back,color: Colors.white),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },

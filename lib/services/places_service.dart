@@ -1,10 +1,6 @@
 // import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
 
-import 'package:women_safety/data/model/response/geometry.dart';
-import 'package:women_safety/data/model/response/location.dart';
-import 'package:women_safety/data/model/response/place.dart';
-import 'package:women_safety/data/model/response/place_search.dart';
+
 
 class PlacesService {
   final key = 'YOUR-API-KEY';

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:provider/provider.dart';
-import 'package:women_safety/helper/application_bloc.dart';
 import 'package:women_safety/helper/helpline_number_data.dart';
 import 'package:women_safety/shared/appbar.dart';
-import 'package:women_safety/shared/bottom.dart';
 
 class HelplineNumberScreen extends StatefulWidget {
   const HelplineNumberScreen({Key? key}) : super(key: key);

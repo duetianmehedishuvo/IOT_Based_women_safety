@@ -64,11 +64,11 @@ class DashboardScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       innerButtonWidget(() {
-                        Helper.toScreen(PlacesScreen());
+                        Helper.toScreen(const PlacesScreen());
                       }, "Nearest Place"),
                       const SizedBox(width: 10),
                       innerButtonWidget(() {
-                        Helper.toScreen(HelplineNumberScreen());
+                        Helper.toScreen(const HelplineNumberScreen());
                       }, "Helpline"),
                     ],
                   ),

@@ -13,7 +13,7 @@ class WeatherProvider with ChangeNotifier {
   WeatherProvider({required this.weatherRepo});
 
   double distance = 0.00;
-  LatLng childInitializeLatLng = LatLng(0.00000, 0.00000);
+  LatLng childInitializeLatLng = const LatLng(0.00000, 0.00000);
   bool _isLoading = false;
 
   bool get isLoading => _isLoading;
