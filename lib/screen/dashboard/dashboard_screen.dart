@@ -2,12 +2,14 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:women_safety/data/model/response/Forecast_weather_model.dart';
 import 'package:women_safety/helper/message_dao.dart';
 import 'package:women_safety/provider/location_provider.dart';
 import 'package:women_safety/provider/weather_provider.dart';
+import 'package:women_safety/screen/helpline_number_screen.dart';
 import 'package:women_safety/screen/home/range_select_screen.dart';
 import 'package:women_safety/screen/home_screen.dart';
+import 'package:women_safety/screen/places.dart';
+import 'package:women_safety/screen/position/position_screen.dart';
 import 'package:women_safety/util/helper.dart';
 import 'package:women_safety/util/theme/app_colors.dart';
 import 'package:women_safety/util/theme/text.styles.dart';
@@ -19,9 +21,7 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('SMART Child Care'),
-      ),
+      appBar: AppBar(title: const Text('SMART Child Care'), backgroundColor: colorPrimary),
       body: Consumer2<LocationProvider, WeatherProvider>(
         builder: (context, locationProvider, weatherProvider, child) => StreamBuilder(
             stream: MessageDao.messagesRef.onValue,
@@ -34,7 +34,7 @@ class DashboardScreen extends StatelessWidget {
 
               LatLng latLng = LatLng(double.parse(snapshot.data!.snapshot.child('Location').children.elementAt(7).value.toString()),
                   double.parse(snapshot.data!.snapshot.child('Location').children.elementAt(2).value.toString()));
-              weatherProvider.calculateDistance(latLng);
+              // weatherProvider.calculateDistance(latLng);
               locationProvider.initializeRange(
                 double.parse(snapshot.data!.snapshot.child('Location').children.elementAt(3).value.toString()),
                 double.parse(snapshot.data!.snapshot.child('Location').children.elementAt(1).value.toString()),
@@ -47,13 +47,32 @@ class DashboardScreen extends StatelessWidget {
               );
 
               return ListView(
+                physics: const BouncingScrollPhysics(),
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                 children: [
+                  deviceOximiterResult(snapshot, context),
+                  const SizedBox(height: 15),
                   userPositionWidget(snapshot, locationProvider, latLng),
                   const SizedBox(height: 15),
-                  childPositionWiseWeatherWidget(weatherProvider),
+                  Center(
+                    child: innerButtonWidget(() {
+                      Helper.toScreen(PositionScreen(latLng));
+                    }, "Position Wise Weather & Humidity Response"),
+                  ),
                   const SizedBox(height: 15),
-                  childPositionWiseForecastWeatherWidget(weatherProvider, context)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      innerButtonWidget(() {
+                        Helper.toScreen(PlacesScreen());
+                      }, "Nearest Place"),
+                      const SizedBox(width: 10),
+                      innerButtonWidget(() {
+                        Helper.toScreen(HelplineNumberScreen());
+                      }, "Helpline"),
+                    ],
+                  ),
+                  const SizedBox(height: 15),
                 ],
               );
             }),
@@ -61,7 +80,23 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  Widget childPositionWiseForecastWeatherWidget(WeatherProvider weatherProvider, BuildContext context) {
+  Widget innerButtonWidget(GestureTapCallback onTap, String title) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        decoration: BoxDecoration(
+            color: colorPrimary,
+            boxShadow: [
+              BoxShadow(color: Colors.black.withOpacity(.2), blurRadius: 10.0, spreadRadius: 3.0, offset: const Offset(0.0, 0.0))
+            ],
+            borderRadius: BorderRadius.circular(10)),
+        child: Text(title, style: sfProStyle500Medium.copyWith(fontSize: 16, color: Colors.white), textAlign: TextAlign.center),
+      ),
+    );
+  }
+
+  Widget deviceOximiterResult(AsyncSnapshot<DatabaseEvent> snapshot, BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
       decoration: BoxDecoration(
@@ -72,104 +107,17 @@ class DashboardScreen extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 10),
-          Text('CHILD POSITION WISE NEXT 16 DAYS FORECAST WEATHER:',
-              style: sfProStyle600SemiBold.copyWith(fontSize: 16), textAlign: TextAlign.center),
+          Text('HeartRate & oximeter :', style: sfProStyle600SemiBold.copyWith(fontSize: 16), textAlign: TextAlign.center),
           const Text('---------------------------------------------------------------------------------------------------',
               maxLines: 1, style: TextStyle(color: colorPrimary, wordSpacing: 2)),
-          SizedBox(
-            height: 230,
-            child: ListView.builder(
-                itemCount: weatherProvider.forecastWeatherList.length,
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  ForecastWeatherModel forecastWeatherModel = weatherProvider.forecastWeatherList[index];
-                  return SizedBox(
-                    width: 180,
-                    child: Column(
-                      children: [
-                        Text('${forecastWeatherModel.datetime}',
-                            style: sfProStyle600SemiBold.copyWith(fontSize: 16), textAlign: TextAlign.center),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Image.network('https://www.weatherbit.io/static/img/icons/${forecastWeatherModel.weather!.icon}.png',
-                                width: 40, height: 40),
-                            Expanded(
-                                child:
-                                    Text(forecastWeatherModel.weather!.description!, style: sfProStyle400Regular.copyWith(fontSize: 16))),
-                          ],
-                        ),
-                        rowWidget('Max Temp:', '${forecastWeatherModel.highTemp} ºC', 0),
-                        rowWidget('Min Temp:', '${forecastWeatherModel.lowTemp} ºC', 1),
-                        rowWidget('Ozone:', '${forecastWeatherModel.ozone} Du', 2),
-                        rowWidget('Wind speed:', '${forecastWeatherModel.windSpd} m/s', 3),
-                        rowWidget('Wind direction:', '${forecastWeatherModel.windDir} º', 4),
-                        rowWidget('Visibility:', '${forecastWeatherModel.vis} KM', 5),
-                      ],
-                    ),
-                  );
-                }),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget childPositionWiseWeatherWidget(WeatherProvider weatherProvider) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [BoxShadow(color: colorPrimary.withOpacity(.2), blurRadius: 3.0, spreadRadius: 3.0, offset: const Offset(0.0, 0.0))],
-          border: Border.all(color: colorPrimary, width: 4)),
-      child: Column(
-        children: [
-          const SizedBox(height: 10),
-          Text('CHILD POSITION WISE WEATHER:', style: sfProStyle600SemiBold.copyWith(fontSize: 16), textAlign: TextAlign.center),
-          const Text('---------------------------------------------------------------------------------------------------',
-              maxLines: 1, style: TextStyle(color: colorPrimary, wordSpacing: 2)),
-          weatherProvider.currentWeatherModel.weather == null
-              ? const SizedBox.shrink()
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    weatherProvider.currentWeatherModel.weather == null
-                        ? const SizedBox.shrink()
-                        : Image.network(
-                            'https://www.weatherbit.io/static/img/icons/${weatherProvider.currentWeatherModel.weather!.icon}.png',
-                            width: 80,
-                            height: 80),
-                    Text(weatherProvider.currentWeatherModel.weather!.description!, style: sfProStyle400Regular.copyWith(fontSize: 16)),
-                    Text('${weatherProvider.currentWeatherModel.temp.toString()} ºC',
-                        style: sfProStyle800ExtraBold.copyWith(fontSize: 17, color: colorPrimary)),
-                  ],
-                ),
-          const Text('---------------------------------------------------------------------------------------------------',
-              maxLines: 1, style: TextStyle(color: colorPrimary, wordSpacing: 2)),
-          rowWidget('Pressure:', '${weatherProvider.currentWeatherModel.pres} mb', 0),
-          rowWidget('Wind speed:', '${weatherProvider.currentWeatherModel.windSpd} m/s', 1),
-          rowWidget('Wind direction:', '${weatherProvider.currentWeatherModel.windDir} º', 2),
-          rowWidget('Humidity:', '${weatherProvider.currentWeatherModel.rh} %', 3),
-          rowWidget('Cloud coverage:', '${weatherProvider.currentWeatherModel.clouds} %', 4),
-          rowWidget('Visibility:', '${weatherProvider.currentWeatherModel.vis} KM', 5),
-          rowWidget('Air Quality:', '${weatherProvider.currentWeatherModel.aqi}', 6),
-        ],
-      ),
-    );
-  }
-
-  Widget rowWidget(String title, String value, int index) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      decoration: BoxDecoration(color: index % 2 == 0 ? colorGreenLight.withOpacity(.05) : colorGreenLight.withOpacity(.1)),
-      child: Row(
-        children: [
-          Text(title, style: sfProStyle500Medium.copyWith(fontSize: 15)),
-          const SizedBox(width: 10),
-          Expanded(child: Text(value, style: sfProStyle400Regular.copyWith(fontSize: 15))),
+          rowWidget(
+              'Last Updated At:',
+              '${snapshot.data!.snapshot.child('WeatherEye').children.singleWhere((element) => element.key == 'Date').value} ${snapshot.data!.snapshot.child('WeatherEye').children.singleWhere((element) => element.key == 'Time').value}',
+              0),
+          rowWidget('SpO2:',
+              '${snapshot.data!.snapshot.child('Heartrate').children.singleWhere((element) => element.key == 'oximiter').value} %', 1),
+          rowWidget('PULSE RATE:',
+              '${snapshot.data!.snapshot.child('Heartrate').children.singleWhere((element) => element.key == 'HearRate').value} /Min', 2),
         ],
       ),
     );
@@ -338,4 +286,18 @@ class DashboardScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget rowWidget(String title, String value, int index) {
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+    decoration: BoxDecoration(color: index % 2 == 0 ? colorGreenLight.withOpacity(.05) : colorGreenLight.withOpacity(.1)),
+    child: Row(
+      children: [
+        Text(title, style: sfProStyle500Medium.copyWith(fontSize: 15)),
+        const SizedBox(width: 10),
+        Expanded(child: Text(value, style: sfProStyle400Regular.copyWith(fontSize: 15))),
+      ],
+    ),
+  );
 }

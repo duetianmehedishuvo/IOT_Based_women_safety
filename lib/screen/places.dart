@@ -73,10 +73,7 @@ class _PlacesScreenState extends State<PlacesScreen> {
     final applicationBloc = Provider.of<ApplicationBloc>(context);
     return Scaffold(
       appBar: SafeHervenAppBar("Find Nearby Places", isHome: false),
-      bottomNavigationBar: const MenuBottom(),
-      body: (applicationBloc.currentLocation == null)
-          ? const Center(child: CircularProgressIndicator())
-          : ListView(children: [
+      body: ListView(children: [
               const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
