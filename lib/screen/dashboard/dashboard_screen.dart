@@ -8,6 +8,7 @@ import 'package:women_safety/provider/weather_provider.dart';
 import 'package:women_safety/screen/helpline_number_screen.dart';
 import 'package:women_safety/screen/home/range_select_screen.dart';
 import 'package:women_safety/screen/home_screen.dart';
+import 'package:women_safety/screen/photos/photos_screen.dart';
 import 'package:women_safety/screen/places.dart';
 import 'package:women_safety/screen/position/position_screen.dart';
 import 'package:women_safety/util/helper.dart';
@@ -70,6 +71,10 @@ class DashboardScreen extends StatelessWidget {
                       innerButtonWidget(() {
                         Helper.toScreen(const HelplineNumberScreen());
                       }, "Helpline"),
+                      const SizedBox(width: 10),
+                      innerButtonWidget(() {
+                        Helper.toScreen(const PhotosScreen());
+                      }, "Photos"),
                     ],
                   ),
                   const SizedBox(height: 15),
